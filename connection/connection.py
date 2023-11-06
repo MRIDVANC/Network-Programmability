@@ -20,21 +20,26 @@ print("show interface status komutunun sonucu:\n")
 print(output)
 
 # Örnek 2: "show ip route" komutunu gönder ve sonucunu al
-output2 = net_connect.send_command('show routing summary vrf default ')
-print("\nshow ip route komutunun sonucu:\n")
+output2 = net_connect.send_command('show lldp neighbors')
+print("\nshow lldp komutunun sonucu:\n")
 print(output2)
+
+output3 = net_connect.send_command('show mac address-table')
+print("\nshow mac address komutunun sonucu:\n")
+print(output3)
 
 # Örnek 3: Cihazın konfigürasyonunu değiştirme
 config_commands = [
-    'conf term',
+    'conf t',
     'interface ethernet 1/1',
     'description configDeneme',
     'no shutdown'
 ]
-output3 = net_connect.send_config_set(config_commands)
+output4 = net_connect.send_config_set(config_commands)
 print("\nKonfigürasyon değişikliği sonucu:\n")
-output3 = net_connect.send_command('show run interface ethernet 1/1 ')
-print(output3)
+output5 = net_connect.send_command('show run interface ethernet 1/1 ')
+print(output4)
+print(output5)
 
 # Bağlantıyı kapat
 net_connect.disconnect()

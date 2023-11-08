@@ -1,6 +1,5 @@
 from netmiko import ConnectHandler
-from netmiko.ssh_exception import NetMikoTimeoutException, NetMikoAuthenticationException
-
+from netmiko import NetMikoTimeoutException, NetMikoAuthenticationException
 cisco_device = {
     'device_type': 'cisco_ios',
     'ip': '192.168.1.101',

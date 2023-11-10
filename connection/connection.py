@@ -2,6 +2,7 @@ from netmiko import ConnectHandler
 from netmiko import NetMikoTimeoutException, NetMikoAuthenticationException
 from kripto import encrypt_decrypt_password, get_key
 
+
 def connect_to_switch(ip_address):
     encrypted_password = encrypt_decrypt_password(ip_address)
     key1 = get_key("192.168.1.103")

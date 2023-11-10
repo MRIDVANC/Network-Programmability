@@ -1,12 +1,16 @@
 from netmiko import ConnectHandler
 from netmiko import NetMikoTimeoutException, NetMikoAuthenticationException
+from kripto import encrypt_decrypt_password, get_key
 
 def connect_to_switch(ip_address):
+    encrypted_password = encrypt_decrypt_password(ip_address)
+    key1 = get_key("192.168.1.103")
+    key2 = get_key("192.168.1.104")
     switch_device = {
         'device_type': 'cisco_ios',
         'ip': ip_address,
         'username': 'admin',
-        'password': 'Turkcell!2023',
+        'password': encrypted_password,  # Şifre yerine şifrelenmiş hali kullanılıyor
         'port': 22,
     }
 
@@ -63,9 +67,13 @@ def connect_to_switch(ip_address):
     except Exception as e:
         print(f"Beklenmeyen bir hata oluştu: {str(e)}")
 
+
 # Kullanıcıya hangi switch için işlem yapmak istediğini sormak
 while True:
-    switch_choice = input("Hangi switch için işlem yapmak istiyorsunuz? (Q/q to exit, 1 for 192.168.1.103, 2 for 192.168.1.104): ").lower()
+    switch_choice = input(
+        "Hangi switch için işlem yapmak istiyorsunuz? (Q/q to exit, 1 for 192.168.1.103, "
+        "2 for 192.168.1.104): ").lower()
+
     if switch_choice == 'q':
         break
     elif switch_choice == '1':
